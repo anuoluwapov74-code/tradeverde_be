@@ -44,8 +44,8 @@ EMAIL_USE_SSL = True  # ✅ CORRECT for port 465
 EMAIL_USE_TLS = False  # ✅ Must be False when using SSL
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='your-email@gmail.com')  # Your Email
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-app-password')  # Email App Password
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='Citadel Markets Pro <support@scoptrade.com>')
-ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='support@scoptrade.com')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='VerdeTrades <support@verdetrades.com>')
+ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='support@verdetrades.com')
 
 
 FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:3000')
@@ -273,7 +273,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
     "http://111.90.143.29",
-    "https://www.scopstrades.com",
+    "https://www.verdetrades.com",
 ]
 
 _render_url = config('RENDER_EXTERNAL_URL', default='')
@@ -350,7 +350,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
     "http://111.90.143.29",
-    "https://www.scopstrades.com",
+    "https://www.verdetrades.com",
 ]
 
 if _render_url and _render_url not in CSRF_TRUSTED_ORIGINS:

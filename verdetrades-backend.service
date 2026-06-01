@@ -1,0 +1,21 @@
+[Unit]
+Description=VerdeTrades Django Backend (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/verdetrades/backend/tradeverde
+EnvironmentFile=/var/www/verdetrades/backend/tradeverde/.env
+ExecStart=/var/www/verdetrades/venv/bin/gunicorn \
+    --workers 3 \
+    --bind 127.0.0.1:8002 \
+    --timeout 120 \
+    --access-logfile /var/log/verdetrades/gunicorn-access.log \
+    --error-logfile /var/log/verdetrades/gunicorn-error.log \
+    tradeverde.wsgi:application
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
