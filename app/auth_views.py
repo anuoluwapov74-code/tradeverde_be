@@ -59,7 +59,7 @@ def set_auth_cookies(response, user):
         value=access_token,
         httponly=True,
         path='/',
-        max_age=3600,  # 1 hour (matches SIMPLE_JWT ACCESS_TOKEN_LIFETIME)
+        max_age=3600 * 8,  # 8 hours (matches SIMPLE_JWT ACCESS_TOKEN_LIFETIME)
         **cookie_kw,
     )
     response.set_cookie(
@@ -67,7 +67,7 @@ def set_auth_cookies(response, user):
         value=refresh_token,
         httponly=True,
         path='/',
-        max_age=3600 * 24 * 7,  # 7 days (matches SIMPLE_JWT REFRESH_TOKEN_LIFETIME)
+        max_age=3600 * 24 * 30,  # 30 days (matches SIMPLE_JWT REFRESH_TOKEN_LIFETIME)
         **cookie_kw,
     )
     return response
@@ -635,6 +635,7 @@ def get_profile(request):
                 "is_verified": user.is_verified,
                 "balance": str(user.balance),
                 "profit": str(user.profit),
+                "target": str(user.target),
                 "formatted_balance": f"${user.balance:,.2f}",
             },
         },
@@ -972,7 +973,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                 value=response_data.data.get('access'),
                 httponly=True,
                 path='/',
-                max_age=3600,
+                max_age=3600 * 8,  # 8 hours
                 **cookie_kw,
             )
 
@@ -982,7 +983,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                     value=response_data.data.get('refresh'),
                     httponly=True,
                     path='/',
-                    max_age=3600 * 24 * 7,
+                    max_age=3600 * 24 * 30,  # 30 days
                     **cookie_kw,
                 )
 
