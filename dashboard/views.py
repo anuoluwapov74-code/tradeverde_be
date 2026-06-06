@@ -286,18 +286,29 @@ def delete_user(request, user_id):
 @admin_required
 def kyc_requests(request):
     status_filter = request.GET.get('status', 'pending')
+    search_query = request.GET.get('search', '').strip()
+
     if status_filter == 'pending':
         users = CustomUser.objects.filter(has_submitted_kyc=True, is_verified=False)
     elif status_filter == 'approved':
         users = CustomUser.objects.filter(has_submitted_kyc=True, is_verified=True)
     else:
         users = CustomUser.objects.filter(has_submitted_kyc=True)
+
+    if search_query:
+        users = users.filter(
+            Q(email__icontains=search_query) |
+            Q(first_name__icontains=search_query) |
+            Q(last_name__icontains=search_query)
+        )
+
     users = users.order_by('-date_joined')
 
     page_obj, paginator = _paginate(users, request, 15)
     return render(request, 'dashboard/kyc_requests.html', {
         'kyc_requests': page_obj, 'page_obj': page_obj, 'paginator': paginator,
         'is_paginated': paginator.num_pages > 1, 'status_filter': status_filter,
+        'search_query': search_query,
     })
 
 
