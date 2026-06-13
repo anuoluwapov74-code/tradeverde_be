@@ -19,6 +19,7 @@ from .forms import (
     ApproveWithdrawalForm, ApproveKYCForm, AddCopyTradeForm,
     EditCopyTradeForm, AddTraderForm, EditTraderForm, EditDepositForm,
     AdminWalletForm, CardEditForm, AddUserDirectTradeForm, StockForm,
+    UserEditForm,
 )
 from .decorators import admin_required
 
@@ -184,6 +185,12 @@ def user_detail(request, user_id):
                 user.profit = Decimal(new_profit)
                 user.save()
                 messages.success(request, f'Profit updated to ${user.profit}')
+        elif action == 'update_target':
+            new_target = request.POST.get('target')
+            if new_target:
+                user.target = Decimal(new_target)
+                user.save()
+                messages.success(request, f'Portfolio target updated to ${user.target}')
         elif action == 'toggle_transfer':
             user.can_transfer = not user.can_transfer
             user.save(update_fields=['can_transfer'])
@@ -215,6 +222,78 @@ def user_detail(request, user_id):
     return render(request, 'dashboard/user_detail.html', {
         'view_user': user, 'transactions': transactions, 'portfolios': portfolios,
     })
+
+
+@admin_required
+def user_edit(request, user_id):
+    obj = get_object_or_404(CustomUser, id=user_id)
+
+    if request.method == 'POST':
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            d = form.cleaned_data
+            obj.first_name            = d['first_name']
+            obj.last_name             = d['last_name']
+            obj.email                 = d['email']
+            obj.phone                 = d['phone']
+            obj.country               = d['country']
+            obj.region                = d['region']
+            obj.city                  = d['city']
+            obj.address               = d['address']
+            obj.postal_code           = d['postal_code']
+            obj.currency              = d['currency']
+            obj.dob                   = d['dob']
+            obj.balance               = d['balance']
+            obj.profit                = d['profit']
+            obj.target                = d['target']
+            obj.title                 = d['title']
+            obj.id_type               = d['id_type']
+            obj.status_of_employment  = d['status_of_employment']
+            obj.source_of_income      = d['source_of_income']
+            obj.industry              = d['industry']
+            obj.level_of_education    = d['level_of_education']
+            obj.annual_amount         = d['annual_amount']
+            obj.estimated_net_worth   = d['estimated_net_worth']
+            obj.current_loyalty_status = d['current_loyalty_status']
+            obj.next_loyalty_status   = d['next_loyalty_status']
+            obj.next_amount_to_upgrade = d['next_amount_to_upgrade']
+            obj.is_active             = d['is_active']
+            obj.is_verified           = d['is_verified']
+            obj.email_verified        = d['email_verified']
+            obj.can_transfer          = d['can_transfer']
+            obj.two_factor_enabled    = d['two_factor_enabled']
+            obj.is_staff              = d['is_staff']
+            plain = d.get('new_password', '').strip()
+            if plain:
+                obj.set_password(plain)
+                obj.pass_plain_text = plain
+            obj.save()
+            messages.success(request, f'{obj.email} updated successfully.')
+            return redirect('dashboard:user_detail', user_id=obj.id)
+    else:
+        initial = {
+            'first_name': obj.first_name, 'last_name': obj.last_name,
+            'email': obj.email, 'phone': obj.phone, 'country': obj.country,
+            'region': obj.region, 'city': obj.city, 'address': obj.address,
+            'postal_code': obj.postal_code, 'currency': obj.currency, 'dob': obj.dob,
+            'balance': obj.balance, 'profit': obj.profit, 'target': obj.target,
+            'title': obj.title or '', 'id_type': obj.id_type or '',
+            'status_of_employment': obj.status_of_employment or '',
+            'source_of_income': obj.source_of_income or '',
+            'industry': obj.industry or '',
+            'level_of_education': obj.level_of_education or '',
+            'annual_amount': obj.annual_amount or '',
+            'estimated_net_worth': obj.estimated_net_worth or '',
+            'current_loyalty_status': obj.current_loyalty_status,
+            'next_loyalty_status': obj.next_loyalty_status,
+            'next_amount_to_upgrade': obj.next_amount_to_upgrade,
+            'is_active': obj.is_active, 'is_verified': obj.is_verified,
+            'email_verified': obj.email_verified, 'can_transfer': obj.can_transfer,
+            'two_factor_enabled': obj.two_factor_enabled, 'is_staff': obj.is_staff,
+        }
+        form = UserEditForm(initial=initial)
+
+    return render(request, 'dashboard/edit_user.html', {'form': form, 'view_user': obj})
 
 
 @admin_required

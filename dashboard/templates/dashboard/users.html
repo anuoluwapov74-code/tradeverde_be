@@ -55,7 +55,10 @@
                 </td>
                 <td class="px-5 py-3 text-gray-500 text-xs">{{ u.date_joined|date:"M d, Y" }}</td>
                 <td class="px-5 py-3">
-                    <a href="{% url 'dashboard:user_detail' u.id %}" class="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium hover:bg-indigo-100 transition">View</a>
+                    <div class="flex items-center gap-2">
+                        <a href="{% url 'dashboard:user_detail' u.id %}" class="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium hover:bg-indigo-100 transition">View</a>
+                        <a href="{% url 'dashboard:user_edit' u.id %}" class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-200 transition">Edit</a>
+                    </div>
                 </td>
             </tr>
             {% empty %}
