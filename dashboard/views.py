@@ -502,7 +502,7 @@ def edit_deposit(request, transaction_id):
                     messages.warning(request, f'${abs(diff)} deducted.')
 
             Notification.objects.create(user=deposit.user, type='deposit', title='Deposit Updated',
-                message='Your deposit has been updated by admin.',
+                message='Your deposit has been updated.',
                 full_details=f'Amount: ${deposit.amount}\nCurrency: {deposit.currency}\nStatus: {deposit.status}\nRef: {deposit.reference}')
             messages.success(request, 'Deposit updated successfully!')
             return redirect('dashboard:deposit_detail', transaction_id=deposit.id)

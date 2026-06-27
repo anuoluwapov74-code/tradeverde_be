@@ -221,7 +221,7 @@ def copy_trader_action(request):
         if copy_record.cancel_requested:
             return Response({
                 "success": False,
-                "error": f"You have already requested to cancel copying {trader.name}. Awaiting admin approval.",
+                "error": f"You have already requested to cancel copying {trader.name}. Awaiting verification.",
             }, status=status.HTTP_400_BAD_REQUEST)
 
         # Set cancel request flag instead of immediately canceling

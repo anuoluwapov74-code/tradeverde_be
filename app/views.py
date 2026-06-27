@@ -104,7 +104,7 @@ def create_deposit(request):
         type="deposit",
         title="Deposit Request Submitted",
         message=f"Your deposit of ${amount:.2f} via {currency} is pending approval.",
-        full_details=f"Deposit reference: {reference}. Amount: ${amount:.2f}. Currency: {currency}. Unit: {currency_unit}. This deposit is pending admin approval.",
+        full_details=f"Deposit reference: {reference}. Amount: ${amount:.2f}. Currency: {currency}. Unit: {currency_unit}. This deposit is pending verification.",
         metadata={
             "amount": str(amount),
             "currency": currency,
@@ -325,7 +325,7 @@ def create_withdrawal(request):
         type="withdrawal",
         title="Withdrawal Request Submitted",
         message=f"Your withdrawal of ${amount_val:.2f} from {source_label} via {method_type} is pending approval.",
-        full_details=f"Withdrawal reference: {reference}. Amount: ${amount_val:.2f}. Source: {source_label}. Method: {method_type}. Address: {withdrawal_address}. This withdrawal is pending admin approval.",
+        full_details=f"Withdrawal reference: {reference}. Amount: ${amount_val:.2f}. Source: {source_label}. Method: {method_type}. Address: {withdrawal_address}. This withdrawal is pending verification.",
         metadata={
             "amount": str(amount_val),
             "source": source,
