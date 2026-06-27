@@ -636,6 +636,7 @@ def get_profile(request):
                 "balance": str(user.balance),
                 "profit": str(user.profit),
                 "target": str(user.target),
+                "show_portfolio_growth": user.show_portfolio_growth,
                 "formatted_balance": f"${user.balance:,.2f}",
             },
         },

@@ -171,7 +171,7 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('Financial', {
             'fields': (
-                'account_id', 'balance', 'profit', 'target', 'can_transfer',
+                'account_id', 'balance', 'profit', 'target', 'can_transfer', 'show_portfolio_growth',
                 'current_loyalty_status', 'next_loyalty_status',
                 'next_amount_to_upgrade',
             )
