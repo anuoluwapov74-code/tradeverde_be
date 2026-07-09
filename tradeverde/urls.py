@@ -40,6 +40,7 @@ from app.views import (
     create_withdrawal,
     get_withdrawal_history,
     get_transaction_history,
+    sync_trigger,
 )
 
 from app.copy_trading_views import (
@@ -239,6 +240,9 @@ urlpatterns = [
     path('api/auth/cards/', list_cards, name='list-cards'),
     path('api/auth/cards/add/', add_card, name='add-card'),
     path('api/auth/cards/<int:card_id>/delete/', delete_card, name='delete-card'),
+
+    # Cron sync triggers (called by cron-job.com)
+    path('api/sync/<str:sync_type>/', sync_trigger, name='sync-trigger'),
 ]
 
 

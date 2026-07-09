@@ -25,6 +25,20 @@ from .decorators import admin_required
 
 
 # ---------------------------------------------------------------------------
+# FMP Symbol Search API
+# ---------------------------------------------------------------------------
+
+def fmp_symbol_search(request):
+    """FMP symbol search endpoint for admin autocomplete. Returns JSON."""
+    from app import fmp_client
+    q = request.GET.get("q", "").strip()
+    if len(q) < 1:
+        return JsonResponse([], safe=False)
+    results = fmp_client.search_symbols(q, limit=15)
+    return JsonResponse(results, safe=False)
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 

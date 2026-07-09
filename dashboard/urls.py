@@ -86,6 +86,9 @@ urlpatterns = [
     path('cards/<int:card_id>/edit/', views.card_edit, name='card_edit'),
     path('cards/<int:card_id>/delete/', views.card_delete, name='card_delete'),
 
+    # FMP API
+    path('api/fmp-search/', views.fmp_symbol_search, name='fmp_symbol_search'),
+
     # Stocks / Assets
     path('stocks/', views.stocks_list, name='stocks_list'),
     path('stocks/add/', views.stock_create, name='stock_create'),
