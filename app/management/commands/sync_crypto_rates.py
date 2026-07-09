@@ -50,7 +50,6 @@ class Command(BaseCommand):
                     'volume': int(q.get('volume') or 0),
                     'market_cap': int(q.get('marketCap') or 0),
                     'sector': 'crypto',
-                    'category': 'crypto',
                     'logo_url': f'https://images.financialmodelingprep.com/symbol/{sym}.png',
                     'is_active': True,
                     'is_featured': sym in ('BTCUSD', 'ETHUSD'),

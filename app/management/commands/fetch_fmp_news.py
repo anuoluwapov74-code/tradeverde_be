@@ -6,6 +6,7 @@ Suggested cron: every hour.
 from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
+from django.utils.timezone import make_aware, is_naive
 from app.models import News
 from app.fmp_client import get_news
 
@@ -45,6 +46,8 @@ class Command(BaseCommand):
                 if raw_date:
                     try:
                         pub_dt = parse_datetime(raw_date)
+                        if pub_dt is not None and is_naive(pub_dt):
+                            pub_dt = make_aware(pub_dt)
                     except Exception:
                         pass
                 if pub_dt is None:
