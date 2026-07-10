@@ -902,13 +902,21 @@ class UserCopyTraderHistory(models.Model):
 
         
         
-        return logo_mapping.get(self.market, None)
-    
+        return logo_mapping.get(self.market) or f'https://images.financialmodelingprep.com/symbol/{self.market}.png'
+
     @property
     def market_name(self):
         """Get full name of the market"""
         market_dict = dict(self.MARKET_CHOICES)
-        return market_dict.get(self.market, self.market)
+        if self.market in market_dict:
+            return market_dict[self.market]
+        try:
+            stock = Stock.objects.filter(symbol=self.market).values_list('name', flat=True).first()
+            if stock:
+                return stock
+        except Exception:
+            pass
+        return self.market
     
     @property
     def time_ago(self):

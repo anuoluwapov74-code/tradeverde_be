@@ -21,7 +21,12 @@ def generate_verification_code():
 def send_email(to_email, subject, html_content):
     """Send HTML email using Resend API"""
     try:
-        resend.api_key = settings.RESEND_API_KEY
+        api_key = settings.RESEND_API_KEY
+        if not api_key:
+            logger.error("send_email: RESEND_API_KEY is not set — email not sent to %s", to_email)
+            return False
+
+        resend.api_key = api_key
 
         resend.Emails.send({
             "from": settings.DEFAULT_FROM_EMAIL,
@@ -30,11 +35,14 @@ def send_email(to_email, subject, html_content):
             "html": html_content,
         })
 
-        logger.info(f"Email sent successfully to {to_email}")
+        logger.info("send_email: sent '%s' to %s", subject, to_email)
         return True
 
     except Exception as e:
-        logger.error(f"Failed to send email to {to_email}: {str(e)}")
+        logger.error(
+            "send_email: FAILED to send '%s' to %s — %s: %s",
+            subject, to_email, type(e).__name__, e,
+        )
         return False
 
 
@@ -62,7 +70,7 @@ def _base_styles():
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
         .header {
-            background-color: #0a1628;
+            background-color: #001a0f;
             padding: 32px 40px;
         }
         .header-logo {
@@ -72,12 +80,12 @@ def _base_styles():
             letter-spacing: 0.5px;
         }
         .header-logo span {
-            color: #3b82f6;
+            color: #00C9A7;
         }
         .header-divider {
             width: 40px;
             height: 2px;
-            background-color: #3b82f6;
+            background-color: #00C9A7;
             margin-top: 16px;
         }
         .body-content {
@@ -129,8 +137,8 @@ def _base_styles():
         .btn {
             display: inline-block;
             padding: 12px 32px;
-            background-color: #3b82f6;
-            color: #ffffff;
+            background-color: #00C9A7;
+            color: #001a0f;
             text-decoration: none;
             border-radius: 4px;
             font-size: 14px;
@@ -138,8 +146,8 @@ def _base_styles():
             letter-spacing: 0.3px;
         }
         .info-box {
-            background-color: #f8fafc;
-            border-left: 3px solid #3b82f6;
+            background-color: #f0fdf9;
+            border-left: 3px solid #00C9A7;
             padding: 16px 20px;
             margin: 24px 0;
         }
@@ -159,7 +167,7 @@ def _base_styles():
         .code-value {
             font-size: 40px;
             font-weight: 700;
-            color: #0a1628;
+            color: #00C9A7;
             letter-spacing: 12px;
             font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
         }
@@ -423,8 +431,8 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
         <style>
             {_base_styles()}
             .amount-display {{
-                background-color: #eff6ff;
-                border: 1px solid #bfdbfe;
+                background-color: #f0fdf9;
+                border: 1px solid #99f6e4;
                 border-radius: 6px;
                 padding: 24px;
                 text-align: center;
@@ -433,7 +441,7 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
             .amount-display .amount {{
                 font-size: 32px;
                 font-weight: 700;
-                color: #2563eb;
+                color: #00A88C;
             }}
             .amount-display .label {{
                 font-size: 12px;
@@ -445,8 +453,8 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
             .status-badge {{
                 display: inline-block;
                 padding: 4px 12px;
-                background-color: #eff6ff;
-                color: #1e40af;
+                background-color: #f0fdf9;
+                color: #00796B;
                 border-radius: 2px;
                 font-size: 11px;
                 font-weight: 600;

@@ -4,14 +4,17 @@ HTTPOnly Cookie-based Token Authentication
 """
 
 import random
+import logging
 from django.utils import timezone
+
+logger = logging.getLogger(__name__)
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import AdminWallet, Transaction, PaymentMethod, Notification
+from .models import AdminWallet, Transaction, PaymentMethod, Notification, Stock
 from .email_service import send_admin_payment_intent_notification
 
 
@@ -59,10 +62,31 @@ def sync_trigger(request, sync_type):
 def get_deposit_options(request):
     """
     Get all active admin wallets (deposit payment methods).
+    Rates are sourced live from the Stock table (populated by sync_crypto_rates).
+    Falls back to the manually-set AdminWallet.amount if not found.
     Public endpoint - no auth required.
     """
-    wallets = AdminWallet.objects.filter(is_active=True)
+    # Map AdminWallet currency labels to FMP Stock symbols
+    CURRENCY_TO_SYMBOL = {
+        "BTC":         "BTCUSD",
+        "ETH":         "ETHUSD",
+        "SOL":         "SOLUSD",
+        "BNB":         "BNBUSD",
+        "XRP":         "XRPUSD",
+        "TRX":         "TRXUSD",
+        "USDT ERC20":  None,   # stablecoin — always 1:1
+        "USDT TRC20":  None,
+        "USDC":        None,
+    }
 
+    # Fetch live prices for all relevant symbols in one query
+    symbols = [s for s in CURRENCY_TO_SYMBOL.values() if s]
+    live_prices = {
+        s.symbol: s.price
+        for s in Stock.objects.filter(symbol__in=symbols, is_active=True)
+    }
+
+    wallets = AdminWallet.objects.filter(is_active=True)
     wallet_list = []
     for w in wallets:
         qr_code_url = None
@@ -72,11 +96,22 @@ def get_deposit_options(request):
             except Exception:
                 qr_code_url = None
 
+        # Resolve live rate
+        stock_sym = CURRENCY_TO_SYMBOL.get(w.currency)
+        if stock_sym is None:
+            # Stablecoin: 1 USD = 1 unit
+            live_rate = "1.000000"
+        elif stock_sym in live_prices and live_prices[stock_sym]:
+            live_rate = str(live_prices[stock_sym])
+        else:
+            # Fallback to manually-set rate
+            live_rate = str(w.amount)
+
         wallet_list.append({
             "id": w.id,
             "currency": w.currency,
             "currency_display": w.get_currency_display(),
-            "amount": str(w.amount),
+            "amount": live_rate,
             "wallet_address": w.wallet_address,
             "qr_code_url": qr_code_url,
             "is_active": w.is_active,
@@ -179,7 +214,15 @@ def deposit_payment_intent(request):
             "error": "Currency and amount are required.",
         }, status=status.HTTP_400_BAD_REQUEST)
 
-    send_admin_payment_intent_notification(user, currency, dollar_amount, currency_unit)
+    try:
+        sent = send_admin_payment_intent_notification(user, currency, dollar_amount, currency_unit)
+        if not sent:
+            logger.error(
+                "deposit_payment_intent: email failed for user=%s currency=%s amount=%s",
+                user.email, currency, dollar_amount,
+            )
+    except Exception as exc:
+        logger.exception("deposit_payment_intent: unexpected error sending intent email: %s", exc)
 
     return Response({
         "success": True,

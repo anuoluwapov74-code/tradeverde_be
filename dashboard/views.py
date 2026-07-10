@@ -1320,7 +1320,6 @@ def add_user_trade(request, user_id):
                 closed_at=cd.get('closed_at'),
                 notes=cd.get('notes', ''),
                 reference=reference,
-                custom_image=cd.get('custom_image') or None,
             )
             profit = (user_balance * cd['profit_loss_percent']) / Decimal('100')
             viewed_user.profit = (viewed_user.profit or Decimal('0.00')) + profit
@@ -1356,10 +1355,6 @@ def edit_user_trade(request, user_id, trade_id):
             trade.status = cd['status']
             trade.closed_at = cd.get('closed_at')
             trade.notes = cd.get('notes', '')
-            if cd.get('custom_image'):
-                trade.custom_image = cd['custom_image']
-            elif request.POST.get('clear_image'):
-                trade.custom_image = None
             trade.save()
             viewed_user.profit = (viewed_user.profit or Decimal('0.00')) + (new_profit - old_profit)
             viewed_user.save(update_fields=['profit'])
@@ -1433,7 +1428,6 @@ def bulk_add_user_trade(request):
                         closed_at=cd.get('closed_at'),
                         notes=cd.get('notes', ''),
                         reference=reference,
-                        custom_image=cd.get('custom_image') or None,
                     )
                     profit = (user_balance * cd['profit_loss_percent']) / Decimal('100')
                     u.profit = (u.profit or Decimal('0.00')) + profit
