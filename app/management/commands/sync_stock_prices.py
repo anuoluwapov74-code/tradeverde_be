@@ -58,12 +58,12 @@ class Command(BaseCommand):
 
             defaults = {
                 'name': q.get('name') or SYMBOL_NAMES.get(sym, sym),
+                'category': sym_to_cat.get(sym, 'stock'),
                 'price': Decimal(str(price)),
                 'change': Decimal(str(q.get('change') or 0)),
                 'change_percent': Decimal(str(q.get('changePercentage') or q.get('changesPercentage') or 0)),
                 'volume': int(q.get('volume') or 0),
                 'market_cap': int(q.get('marketCap') or 0),
-                'sector': sym_to_cat.get(sym, 'stock'),
                 'logo_url': f'https://images.financialmodelingprep.com/symbol/{sym}.png',
                 'is_active': True,
                 'is_featured': sym in FEATURED,
