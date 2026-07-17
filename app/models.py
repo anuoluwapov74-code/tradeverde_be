@@ -1375,6 +1375,12 @@ class News(models.Model):
         null=True,
         help_text="Upload news article image or company logo"
     )
+    source_image_url = models.URLField(
+        max_length=1000,
+        blank=True,
+        null=True,
+        help_text="External image URL from the news source/FMP (used when no image is uploaded above)"
+    )
     tags = models.JSONField(
         default=list,
         blank=True,

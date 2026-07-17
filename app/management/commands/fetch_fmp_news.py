@@ -63,6 +63,7 @@ class Command(BaseCommand):
                     published_at=pub_dt,
                     tags=[],
                     is_featured=False,
+                    source_image_url=a.get('image') or None,
                 )
                 created_total += 1
 

@@ -59,6 +59,9 @@ def stock_detail(request, symbol):
     # Fetch company profile (sector, description, CEO, website, etc.)
     profile = get_profile(symbol)
 
+    # Prefer a curated/admin-set logo on the Stock row; fall back to FMP's own logo CDN.
+    curated_logo = Stock.objects.filter(symbol=symbol).values_list("logo_url", flat=True).first()
+
     price     = float(q.get("price") or 0)
     change    = float(q.get("change") or 0)
     change_pct = float(q.get("changePercentage") or q.get("changesPercentage") or 0)
@@ -66,7 +69,7 @@ def stock_detail(request, symbol):
     stock_data = {
         "symbol":           symbol,
         "name":             q.get("name") or profile.get("companyName") or symbol,
-        "logo_url":         f"https://images.financialmodelingprep.com/symbol/{symbol}.png",
+        "logo_url":         curated_logo or f"https://images.financialmodelingprep.com/symbol/{symbol}.png",
         "price":            f"{price:.2f}",
         "change":           f"{change:.2f}",
         "change_percent":   f"{change_pct:.2f}",

@@ -26,7 +26,6 @@ class Command(BaseCommand):
             {
                 "symbol": "AAPL",
                 "name": "Apple Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/aapl_logo.png",
                 "price": Decimal("185.50"),
                 "change": Decimal("2.35"),
                 "change_percent": Decimal("1.28"),
@@ -39,7 +38,6 @@ class Command(BaseCommand):
             {
                 "symbol": "MSFT",
                 "name": "Microsoft Corporation",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/msft_logo.png",
                 "price": Decimal("395.75"),
                 "change": Decimal("5.20"),
                 "change_percent": Decimal("1.33"),
@@ -52,7 +50,6 @@ class Command(BaseCommand):
             {
                 "symbol": "GOOGL",
                 "name": "Alphabet Inc. Class A",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/googl_logo.png",
                 "price": Decimal("142.30"),
                 "change": Decimal("1.85"),
                 "change_percent": Decimal("1.32"),
@@ -65,7 +62,6 @@ class Command(BaseCommand):
             {
                 "symbol": "AMZN",
                 "name": "Amazon.com Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/amzn_logo.png",
                 "price": Decimal("168.25"),
                 "change": Decimal("-1.20"),
                 "change_percent": Decimal("-0.71"),
@@ -78,7 +74,6 @@ class Command(BaseCommand):
             {
                 "symbol": "TSLA",
                 "name": "Tesla Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/tsla_logo.png",
                 "price": Decimal("245.80"),
                 "change": Decimal("-3.50"),
                 "change_percent": Decimal("-1.40"),
@@ -91,7 +86,6 @@ class Command(BaseCommand):
             {
                 "symbol": "NVDA",
                 "name": "NVIDIA Corporation",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/nvda_logo.png",
                 "price": Decimal("495.20"),
                 "change": Decimal("12.40"),
                 "change_percent": Decimal("2.57"),
@@ -108,7 +102,6 @@ class Command(BaseCommand):
             {
                 "symbol": "META",
                 "name": "Meta Platforms Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/meta_logo.png",
                 "price": Decimal("385.60"),
                 "change": Decimal("4.25"),
                 "change_percent": Decimal("1.11"),
@@ -121,7 +114,6 @@ class Command(BaseCommand):
             {
                 "symbol": "NFLX",
                 "name": "Netflix Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/nflx_logo.png",
                 "price": Decimal("525.30"),
                 "change": Decimal("8.10"),
                 "change_percent": Decimal("1.57"),
@@ -134,7 +126,6 @@ class Command(BaseCommand):
             {
                 "symbol": "JPM",
                 "name": "JPMorgan Chase & Co.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/jpm_logo.png",
                 "price": Decimal("162.45"),
                 "change": Decimal("-0.85"),
                 "change_percent": Decimal("-0.52"),
@@ -147,7 +138,6 @@ class Command(BaseCommand):
             {
                 "symbol": "V",
                 "name": "Visa Inc. Class A",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/v_logo.png",
                 "price": Decimal("265.90"),
                 "change": Decimal("2.10"),
                 "change_percent": Decimal("0.80"),
@@ -160,7 +150,6 @@ class Command(BaseCommand):
             {
                 "symbol": "WMT",
                 "name": "Walmart Inc.",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/wmt_logo.png",
                 "price": Decimal("168.75"),
                 "change": Decimal("1.25"),
                 "change_percent": Decimal("0.75"),
@@ -173,7 +162,6 @@ class Command(BaseCommand):
             {
                 "symbol": "DIS",
                 "name": "The Walt Disney Company",
-                "logo_url": "https://res.cloudinary.com/dkii82r08/image/upload/v1736448200/dis_logo.png",
                 "price": Decimal("93.80"),
                 "change": Decimal("-1.15"),
                 "change_percent": Decimal("-1.21"),
