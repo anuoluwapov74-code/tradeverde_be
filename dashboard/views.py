@@ -233,6 +233,27 @@ def user_detail(request, user_id):
                     messages.success(request, 'Portfolio updated.')
                 except Portfolio.DoesNotExist:
                     messages.error(request, 'Portfolio not found.')
+        elif action == 'generate_reset_link':
+            # Support fallback for when the automated reset email bounces/is
+            # throttled (e.g. Microsoft consumer domains via Resend/SES).
+            # Uses the exact same token mechanism as the emailed link — same
+            # 1-hour expiry, same /reset-password page — just skips sending
+            # it so an admin can hand it to the client directly.
+            from django.conf import settings
+            from django.utils.http import urlsafe_base64_encode
+            from django.utils.encoding import force_bytes
+            from app.auth_views import password_reset_token
+
+            token = password_reset_token.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_link = f"{settings.FRONTEND_URL}/reset-password?uid={uid}&token={token}"
+
+            transactions = Transaction.objects.filter(user=user).order_by('-created_at')[:20]
+            portfolios = Portfolio.objects.filter(user=user).order_by('-is_active', '-opened_at')
+            return render(request, 'dashboard/user_detail.html', {
+                'view_user': user, 'transactions': transactions, 'portfolios': portfolios,
+                'generated_reset_link': reset_link,
+            })
         return redirect('dashboard:user_detail', user_id=user.id)
 
     transactions = Transaction.objects.filter(user=user).order_by('-created_at')[:20]

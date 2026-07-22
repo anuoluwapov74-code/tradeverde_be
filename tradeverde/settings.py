@@ -95,6 +95,11 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'app.CustomUser'
 
+# Password reset links are advertised as expiring in 1 hour (see
+# app/email_service.py send_password_reset_email) — without this, Django's
+# default of 3 days (259200s) applies instead, making the email copy wrong.
+PASSWORD_RESET_TIMEOUT = 3600
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'app.authentication.CookieJWTAuthentication',
@@ -364,5 +369,53 @@ X_FRAME_OPTIONS = 'DENY'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ----------------------------
+# LOGGING
+# ----------------------------
+# Scoped to this app's own loggers only — deliberately does NOT touch Django's
+# built-in loggers (django.request, django.security, etc.), so the existing
+# error visibility in gunicorn-error.log is untouched, not replaced.
+LOG_DIR = Path(config('LOG_DIR', default=str(BASE_DIR / 'logs')))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    # Must be False — True would silently disable Django's own default
+    # logging (django.request, etc.) the moment this dict is applied.
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {levelname} {name}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'app_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOG_DIR / 'app.log',
+            'maxBytes': 5 * 1024 * 1024,  # 5MB per file
+            'backupCount': 5,
+            'formatter': 'verbose',
+            # Without this, Windows opens the file with the system codepage
+            # (cp1252), which can't encode emoji used in some existing debug
+            # logs (e.g. app/authentication.py) — that raised UnicodeEncodeError
+            # on every write instead of actually logging the line.
+            'encoding': 'utf-8',
+        },
+    },
+    'loggers': {
+        # Covers app.email_service and any other app.* module logger via
+        # propagation — do not add a console handler here, gunicorn already
+        # captures worker stderr into gunicorn-error.log; this would just
+        # duplicate those lines.
+        'app': {
+            'handlers': ['app_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
 
 

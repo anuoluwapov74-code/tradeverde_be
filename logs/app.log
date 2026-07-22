@@ -1,0 +1,124 @@
+2026-07-21 11:45:01,830 ERROR app.email_service: send_email: FAILED to send 'Test Subject' to test@example.com � ValidationError: Invalid `to` field. Please use our testing email address instead of domains like `example.com`. See our documentation for more information.
+2026-07-22 00:49:38,350 INFO app.email_service: send_email: sent 'Deposit Request � admin@gmail.com � $50.0' to ghostcoder.tech@gmail.com
+2026-07-22 00:49:40,950 INFO app.email_service: send_email: sent 'Withdrawal Request � admin@gmail.com � $10.0' to ghostcoder.tech@gmail.com
+2026-07-22 01:02:13,023 INFO app.email_service: send_email: sent 'Payment Intent � admin@gmail.com � $800' to ghostcoder.tech@gmail.com
+2026-07-22 01:05:22,054 INFO app.email_service: send_email: sent 'Payment Intent � admin@gmail.com � $80' to ghostcoder.tech@gmail.com
+2026-07-22 01:07:49,523 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:07:49,523 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:07:49,524 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:07:52,014 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:08:14,878 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:08:14,879 INFO app.authentication: 🔍 Cookies present: ['access_token']
+2026-07-22 01:08:14,879 INFO app.authentication: ✅ Found access_token in cookies (length: 18)
+2026-07-22 01:08:14,935 ERROR app.authentication: ❌ Invalid token: {'detail': ErrorDetail(string='Given token not valid for any token type', code='token_not_valid'), 'code': ErrorDetail(string='token_not_valid', code='token_not_valid'), 'messages': [{'token_class': ErrorDetail(string='AccessToken', code='token_not_valid'), 'token_type': ErrorDetail(string='access', code='token_not_valid'), 'message': ErrorDetail(string='Token is invalid', code='token_not_valid')}]}
+2026-07-22 01:08:49,511 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:08:49,511 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:08:49,512 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:08:51,902 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:09:49,558 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:09:49,558 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:09:49,559 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:09:52,271 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:10:49,492 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:10:49,492 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:10:49,493 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:10:52,002 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:11:49,489 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:11:49,490 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:11:49,490 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:11:55,653 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:12:49,499 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:12:49,500 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:12:49,500 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:12:52,291 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:13:07,938 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/payment-intent/
+2026-07-22 01:13:07,939 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:13:07,939 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:13:10,654 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:13:14,122 INFO app.email_service: send_email: sent 'Payment Intent — admin@gmail.com — $80' to ghostcoder.tech@gmail.com
+2026-07-22 01:13:15,911 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:13:15,912 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:13:15,913 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:13:18,402 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:13:46,468 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:13:46,469 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:13:46,469 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:13:48,698 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:14:16,489 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:14:16,490 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:14:16,490 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:14:19,308 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:14:49,474 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:14:49,474 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:14:49,474 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:14:52,428 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:15:49,493 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:15:49,495 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:15:49,495 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:15:52,096 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:16:46,361 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:16:46,361 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:16:46,362 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:16:48,735 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:16:53,195 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/payment-intent/
+2026-07-22 01:16:53,196 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:16:53,197 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:16:58,151 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:17:01,220 INFO app.email_service: send_email: sent 'Payment Intent — admin@gmail.com — $809' to ghostcoder.tech@gmail.com
+2026-07-22 01:17:15,928 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:17:15,929 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:17:15,930 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:17:18,634 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:17:46,480 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:17:46,480 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:17:46,481 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:17:49,359 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:18:16,503 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:18:16,504 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:18:16,504 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:18:19,279 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:18:49,488 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:18:49,489 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:18:49,489 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:18:51,814 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:19:49,526 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:19:49,527 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:19:49,528 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:19:52,997 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:20:49,501 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:20:49,502 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:20:49,502 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:20:52,040 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:21:49,502 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:21:49,502 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:21:49,503 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:21:52,344 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:22:49,507 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:22:49,507 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:22:49,508 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:22:55,947 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:23:29,734 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-07-22 01:23:29,735 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:23:29,735 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:23:31,559 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-07-22 01:23:31,559 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:23:31,560 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:23:32,076 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:23:33,681 INFO app.authentication: 🔍 Auth attempt for: /api/auth/logout/
+2026-07-22 01:23:33,682 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:23:33,683 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:23:34,388 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:23:34,425 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-07-22 01:23:34,426 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:23:34,426 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:23:34,432 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-07-22 01:23:34,432 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-07-22 01:23:34,432 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-07-22 01:23:36,300 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:23:36,904 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:23:36,906 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-07-22 01:24:02,079 INFO app.authentication: 🔍 Auth attempt for: /api/auth/password-reset/request/
+2026-07-22 01:24:02,080 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid']
+2026-07-22 01:24:02,080 INFO app.authentication: ❌ No access_token in cookies
+2026-07-22 01:24:02,081 INFO app.authentication: ❌ No Authorization header
+2026-07-22 01:24:08,150 INFO app.email_service: send_email: sent 'Password Reset — VerdeTrades' to citadelmarketpro@gmail.com

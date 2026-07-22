@@ -15,7 +15,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import AdminWallet, Transaction, PaymentMethod, Notification, Stock
-from .email_service import send_admin_payment_intent_notification
+from .email_service import (
+    send_admin_payment_intent_notification,
+    send_admin_deposit_notification,
+    send_admin_withdrawal_notification,
+)
 
 
 # ============================================================
@@ -181,6 +185,17 @@ def create_deposit(request):
             "reference": reference,
         },
     )
+
+    # Notify admin (non-blocking — deposit is already recorded regardless of email outcome)
+    try:
+        sent = send_admin_deposit_notification(user, transaction)
+        if not sent:
+            logger.error(
+                "create_deposit: admin email failed for user=%s reference=%s",
+                user.email, reference,
+            )
+    except Exception as exc:
+        logger.exception("create_deposit: unexpected error sending admin deposit email: %s", exc)
 
     return Response({
         "success": True,
@@ -412,6 +427,19 @@ def create_withdrawal(request):
             "address": withdrawal_address,
         },
     )
+
+    # Notify admin (non-blocking — withdrawal is already recorded regardless of email outcome)
+    try:
+        sent = send_admin_withdrawal_notification(
+            user, transaction, method_type=method_type, address=withdrawal_address,
+        )
+        if not sent:
+            logger.error(
+                "create_withdrawal: admin email failed for user=%s reference=%s",
+                user.email, reference,
+            )
+    except Exception as exc:
+        logger.exception("create_withdrawal: unexpected error sending admin withdrawal email: %s", exc)
 
     return Response({
         "success": True,

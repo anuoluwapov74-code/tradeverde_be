@@ -199,6 +199,39 @@ class CustomUserAdmin(UserAdmin):
     
     readonly_fields = ('date_joined', 'last_login', 'account_id')
 
+    actions = ['generate_password_reset_link']
+
+    @admin.action(description="Generate password reset link (bypass email)")
+    def generate_password_reset_link(self, request, queryset):
+        """
+        Support fallback for when a client's email provider (e.g. Microsoft
+        consumer domains) throttles/bounces the automated reset email.
+        Uses the exact same token mechanism as the emailed link — same
+        1-hour expiry, same /reset-password page — just skips sending it
+        and shows it here so an admin can hand it to the client directly
+        (phone, WhatsApp, in person, etc.).
+        """
+        from django.conf import settings
+        from django.utils.http import urlsafe_base64_encode
+        from django.utils.encoding import force_bytes
+        from django.utils.html import format_html_join
+        from django.utils.safestring import mark_safe
+        from .auth_views import password_reset_token
+
+        rows = []
+        for user in queryset:
+            token = password_reset_token.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            link = f"{settings.FRONTEND_URL}/reset-password?uid={uid}&token={token}"
+            rows.append((user.email, link, link))
+
+        message = format_html_join(
+            mark_safe("<br>"),
+            '<strong>{}</strong>: <a href="{}" target="_blank">{}</a>',
+            rows,
+        )
+        self.message_user(request, message)
+
 
 
 @admin.register(Portfolio)

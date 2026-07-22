@@ -3,6 +3,7 @@ Enhanced Authentication Views with Email Verification and 2FA
 HTTPOnly Cookie-based JWT Authentication
 """
 
+import logging
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError as DjangoValidationError
@@ -15,6 +16,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from datetime import timedelta
+
+logger = logging.getLogger(__name__)
 
 # Import your email service
 from .email_service import (
@@ -154,9 +157,11 @@ def register_user_with_verification(request):
 
         # Send welcome email (non-blocking)
         try:
-            send_welcome_email(user)
+            sent = send_welcome_email(user)
+            if not sent:
+                logger.error("register: welcome email failed for user=%s", user.email)
         except Exception as e:
-            print(f"Failed to send welcome email: {e}")
+            logger.exception("register: unexpected error sending welcome email: %s", e)
 
         response = Response(
             {
@@ -806,7 +811,7 @@ def request_password_reset(request):
         )
 
     try:
-        user = User.objects.get(email=email)
+        user = User.objects.get(email__iexact=email)
     except User.DoesNotExist:
         # Don't reveal that user doesn't exist (security best practice)
         return Response(

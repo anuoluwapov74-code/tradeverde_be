@@ -643,23 +643,13 @@ def send_admin_deposit_notification(user, transaction):
 # Admin: Withdrawal Notification
 # ─────────────────────────────────────────────────────────────
 
-def send_admin_withdrawal_notification(user, transaction, payment_method=None):
+def send_admin_withdrawal_notification(user, transaction, method_type=None, address=None):
     admin_email = settings.ADMIN_NOTIFICATION_EMAIL if hasattr(settings, 'ADMIN_NOTIFICATION_EMAIL') else settings.EMAIL_HOST_USER
 
     subject = f"Withdrawal Request \u2014 {user.email} \u2014 ${transaction.amount}"
 
-    payment_method_info = "Not specified"
-    payment_address = "N/A"
-
-    if payment_method:
-        payment_method_info = payment_method.method_type
-        payment_address = payment_method.address or payment_method.bank_account_number or "N/A"
-
-    bank_row = ""
-    if payment_method and payment_method.bank_name:
-        bank_row = f"""
-        <tr><td class="label">Bank</td><td class="value">{payment_method.bank_name}</td></tr>
-        """
+    payment_method_info = method_type or transaction.currency or "Not specified"
+    payment_address = address or "N/A"
 
     html_content = f"""
     <!DOCTYPE html>
@@ -730,13 +720,14 @@ def send_admin_withdrawal_notification(user, transaction, payment_method=None):
                 </div>
 
                 <div class="notice">
-                    <p><strong>Note:</strong> The user's balance has already been deducted. Process this withdrawal or refund if unable to complete.</p>
+                    <p><strong>Note:</strong> The user's balance has NOT been deducted yet — it will only be deducted once this withdrawal is approved. Approve or reject from the admin dashboard.</p>
                 </div>
 
                 <div class="section-title">Transaction Details</div>
                 <table class="detail-table">
                     <tr><td class="label">Reference</td><td class="value">{transaction.reference}</td></tr>
                     <tr><td class="label">Status</td><td class="value">{transaction.status.upper()}</td></tr>
+                    <tr><td class="label">Source</td><td class="value">{transaction.get_source_display()}</td></tr>
                     <tr><td class="label">Date</td><td class="value">{transaction.created_at.strftime('%b %d, %Y at %I:%M %p UTC')}</td></tr>
                 </table>
 
@@ -744,7 +735,6 @@ def send_admin_withdrawal_notification(user, transaction, payment_method=None):
                 <table class="detail-table">
                     <tr><td class="label">Method</td><td class="value">{payment_method_info}</td></tr>
                     <tr><td class="label">Address / Account</td><td class="value" style="font-size: 12px;">{payment_address}</td></tr>
-                    {bank_row}
                 </table>
 
                 <div class="section-title">User Information</div>
@@ -752,7 +742,7 @@ def send_admin_withdrawal_notification(user, transaction, payment_method=None):
                     <tr><td class="label">Name</td><td class="value">{user.first_name} {user.last_name}</td></tr>
                     <tr><td class="label">Email</td><td class="value">{user.email}</td></tr>
                     <tr><td class="label">Account ID</td><td class="value">{user.account_id}</td></tr>
-                    <tr><td class="label">Remaining Balance</td><td class="value">${user.balance}</td></tr>
+                    <tr><td class="label">Current Balance</td><td class="value">${user.balance}</td></tr>
                     <tr><td class="label">KYC</td><td class="value">{'Verified' if user.is_verified else ('Pending' if user.has_submitted_kyc else 'Not Submitted')}</td></tr>
                 </table>
             </div>
