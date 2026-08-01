@@ -122,3 +122,8 @@
 2026-07-22 01:24:02,080 INFO app.authentication: ❌ No access_token in cookies
 2026-07-22 01:24:02,081 INFO app.authentication: ❌ No Authorization header
 2026-07-22 01:24:08,150 INFO app.email_service: send_email: sent 'Password Reset — VerdeTrades' to citadelmarketpro@gmail.com
+2026-07-22 01:36:04,624 INFO app.authentication: 🔍 Auth attempt for: /api/auth/password-reset/request/
+2026-07-22 01:36:04,625 INFO app.authentication: 🔍 Cookies present: ['csrftoken_citadelsmarket', 'citadelsmarket_session', 'csrftoken', 'sessionid']
+2026-07-22 01:36:04,626 INFO app.authentication: ❌ No access_token in cookies
+2026-07-22 01:36:04,627 INFO app.authentication: ❌ No Authorization header
+2026-07-22 01:36:13,846 INFO app.email_service: send_email: sent 'Password Reset — VerdeTrades' to citadelmarketpro@gmail.com
