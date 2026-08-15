@@ -127,3 +127,366 @@
 2026-07-22 01:36:04,626 INFO app.authentication: ❌ No access_token in cookies
 2026-07-22 01:36:04,627 INFO app.authentication: ❌ No Authorization header
 2026-07-22 01:36:13,846 INFO app.email_service: send_email: sent 'Password Reset — VerdeTrades' to citadelmarketpro@gmail.com
+2026-08-03 21:25:14,965 INFO app.authentication: 🔍 Auth attempt for: /api/auth/check/
+2026-08-03 21:25:14,967 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:14,967 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:17,638 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:17,754 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:25:17,754 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:17,754 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:17,767 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/trades/
+2026-08-03 21:25:17,767 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:17,769 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:17,769 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/following/
+2026-08-03 21:25:17,771 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:17,771 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:17,772 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-08-03 21:25:17,774 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:17,774 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:20,022 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:20,023 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:20,033 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:20,054 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-08-03 21:25:20,054 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:20,054 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:20,056 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-08-03 21:25:20,057 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:20,057 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:20,059 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-08-03 21:25:20,059 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:20,059 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:20,203 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:20,323 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/following/
+2026-08-03 21:25:20,324 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:20,324 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:20,561 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:25:20,561 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:20,565 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:22,273 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:22,275 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:22,335 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/trades/
+2026-08-03 21:25:22,335 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:22,335 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:22,413 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:22,578 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-08-03 21:25:22,579 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:22,579 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:22,583 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-08-03 21:25:22,584 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'access_token', 'refresh_token']
+2026-08-03 21:25:22,584 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:22,689 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:22,947 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:24,548 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:24,800 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:24,838 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:25:47,815 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:25:47,815 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:25:47,815 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:25:50,882 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:26:04,333 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/options/
+2026-08-03 21:26:04,334 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:26:04,334 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:26:07,680 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:26:12,728 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/payment-intent/
+2026-08-03 21:26:12,728 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:26:12,729 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:26:15,009 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:26:17,093 ERROR app.email_service: send_email: FAILED to send 'Payment Intent — raaystores@gmail.com — $900' to ghostcoder.tech@gmail.com — ResendError: The verdestrades.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+2026-08-03 21:26:17,093 ERROR app.views: deposit_payment_intent: email failed for user=raaystores@gmail.com currency=BTC amount=900
+2026-08-03 21:26:17,784 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:26:17,785 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:26:17,785 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:26:19,919 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:26:47,808 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:26:47,808 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:26:47,808 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:26:50,120 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:27:17,811 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:27:17,812 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:27:17,812 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:27:20,522 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:27:47,821 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:27:47,821 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:27:47,821 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:27:50,688 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:28:17,825 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:28:17,826 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:28:17,826 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:28:20,046 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:29:19,841 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:29:19,841 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:29:19,842 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:29:22,015 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:29:47,823 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:29:47,823 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:29:47,823 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:29:50,133 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:30:17,823 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:30:17,824 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:30:17,824 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:30:21,262 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:31:19,837 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:31:19,838 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:31:19,838 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:31:22,421 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:32:19,847 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:32:19,847 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:32:19,848 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:32:21,993 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:33:19,811 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:33:19,811 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:33:19,811 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:33:21,930 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:34:19,825 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:34:19,825 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:34:19,826 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:34:22,030 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:35:19,822 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:35:19,823 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:35:19,823 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:35:27,869 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:36:19,817 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:36:19,817 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:36:19,817 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:36:22,798 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:37:19,832 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:37:19,832 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:37:19,832 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:37:21,952 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:38:19,812 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:38:19,812 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:38:19,812 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:38:22,458 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:39:19,832 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:39:19,832 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:39:19,833 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:39:22,095 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:40:19,833 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:40:19,833 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:40:19,833 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:40:21,994 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:41:19,851 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:41:19,852 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:41:19,852 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:41:23,969 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:42:19,835 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:42:19,835 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:42:19,836 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:42:22,202 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:43:19,841 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:43:19,842 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:43:19,843 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:43:22,176 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:44:19,896 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:44:19,897 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:44:19,897 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:44:22,260 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:45:19,841 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:45:19,842 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:45:19,842 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:45:22,637 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:46:19,839 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:46:19,839 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:46:19,839 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:46:22,251 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:47:19,847 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:47:19,847 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:47:19,848 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:47:22,679 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:48:19,816 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:48:19,816 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:48:19,818 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:48:22,268 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:49:19,867 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:49:19,867 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:49:19,867 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:49:22,265 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:50:19,821 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:50:19,821 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:50:19,821 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:50:22,007 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:51:19,839 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:51:19,840 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:51:19,841 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:51:22,292 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:52:19,850 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:52:19,851 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:52:19,851 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:52:22,105 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:53:19,840 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:53:19,841 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:53:19,841 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:53:24,408 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:54:19,848 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:54:19,849 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:54:19,849 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:54:22,031 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:55:19,844 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:55:19,845 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:55:19,845 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:55:22,072 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:56:19,855 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:56:19,856 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:56:19,856 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:56:22,111 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:57:19,861 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:57:19,861 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:57:19,861 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:57:22,293 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:58:19,838 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:58:19,839 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'access_token', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:58:19,839 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 21:58:22,252 INFO app.authentication: ✅ Authentication successful for user: raaystores@gmail.com
+2026-08-03 21:59:19,871 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 21:59:19,871 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 21:59:19,873 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 21:59:19,876 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:00:19,828 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:00:19,828 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:00:19,828 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:00:19,828 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:05,988 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:01:05,988 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:01:05,988 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:01:05,988 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:08,285 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-08-03 22:01:08,286 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:01:08,286 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:01:08,286 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:08,540 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-08-03 22:01:08,542 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:01:08,547 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:01:08,547 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:08,547 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-08-03 22:01:08,549 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:01:08,549 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:01:08,549 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:26,087 INFO app.authentication: 🔍 Auth attempt for: /api/auth/login/
+2026-08-03 22:01:26,087 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'refresh_token', 'csrftoken', 'sessionid']
+2026-08-03 22:01:26,087 INFO app.authentication: ❌ No access_token in cookies
+2026-08-03 22:01:26,087 INFO app.authentication: ❌ No Authorization header
+2026-08-03 22:01:31,355 INFO app.authentication: 🔍 Auth attempt for: /api/auth/check/
+2026-08-03 22:01:31,356 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:31,356 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:33,600 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:33,613 INFO app.authentication: 🔍 Auth attempt for: /api/auth/check/
+2026-08-03 22:01:33,614 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:33,614 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:35,717 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:35,821 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:01:35,821 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:35,824 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:35,824 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/trades/
+2026-08-03 22:01:35,829 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:35,829 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:35,834 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-08-03 22:01:35,834 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:35,835 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:35,842 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/following/
+2026-08-03 22:01:35,843 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:35,843 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:38,084 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:38,100 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:38,121 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:38,122 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:38,135 INFO app.authentication: 🔍 Auth attempt for: /api/auth/profile/
+2026-08-03 22:01:38,135 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:38,135 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:38,139 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-08-03 22:01:38,141 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:38,142 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:38,144 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-08-03 22:01:38,146 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:38,146 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:38,412 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/following/
+2026-08-03 22:01:38,412 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:38,412 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:38,678 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:01:38,679 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:38,679 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:39,493 INFO app.authentication: 🔍 Auth attempt for: /api/auth/copy-trader/trades/
+2026-08-03 22:01:39,495 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:39,495 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:40,285 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:40,299 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:40,317 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:40,644 INFO app.authentication: 🔍 Auth attempt for: /api/auth/withdrawals/history/
+2026-08-03 22:01:40,644 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:40,645 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:40,650 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/history/
+2026-08-03 22:01:40,651 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:40,651 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:40,670 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:40,873 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:41,540 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:42,724 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:42,843 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:43,991 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/options/
+2026-08-03 22:01:43,991 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:43,991 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:46,077 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:01:55,173 INFO app.authentication: 🔍 Auth attempt for: /api/auth/deposits/payment-intent/
+2026-08-03 22:01:55,173 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:01:55,174 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:01:57,763 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:02:00,930 INFO app.email_service: send_email: sent 'Payment Intent — admin@gmail.com — $800' to ghostcoder.tech@gmail.com
+2026-08-03 22:02:05,816 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:02:05,817 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:02:05,817 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:02:09,642 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:02:35,826 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:02:35,827 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:02:35,827 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:02:38,027 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:03:05,808 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:03:05,808 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:03:05,808 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:03:08,191 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:03:35,829 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:03:35,830 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:03:35,830 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:03:38,716 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:04:05,829 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:04:05,830 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:04:05,830 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:04:08,771 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:04:35,817 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:04:35,818 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:04:35,818 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:04:38,628 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:05:19,813 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:05:19,813 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:05:19,813 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:05:36,565 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:06:19,808 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:06:19,809 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:06:19,809 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:06:22,184 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:07:20,255 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:07:20,256 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:07:20,257 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:07:23,068 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:08:19,891 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:08:19,891 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:08:19,891 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:08:22,232 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:09:19,857 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:09:19,858 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:09:19,858 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:09:22,616 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:10:19,846 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:10:19,847 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:10:19,847 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:10:24,977 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-03 22:11:19,839 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-03 22:11:19,840 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-03 22:11:19,840 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-03 22:11:22,386 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com
+2026-08-04 06:17:45,629 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-04 06:17:45,757 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'refresh_token']
+2026-08-04 06:17:45,784 INFO app.authentication: ❌ No access_token in cookies
+2026-08-04 06:17:45,785 INFO app.authentication: ❌ No Authorization header
+2026-08-04 06:17:54,227 INFO app.authentication: 🔍 Auth attempt for: /api/auth/notifications/recent/
+2026-08-04 06:17:54,228 INFO app.authentication: 🔍 Cookies present: ['citadelsmarket_session', 'csrftoken', 'sessionid', 'access_token', 'refresh_token']
+2026-08-04 06:17:54,229 INFO app.authentication: ✅ Found access_token in cookies (length: 231)
+2026-08-04 06:17:57,284 INFO app.authentication: ✅ Authentication successful for user: admin@gmail.com

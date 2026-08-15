@@ -279,6 +279,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3001",
     "http://111.90.143.29",
     "https://www.verdestrades.com",
+    "https://verdestrade.com",
+    "https://www.verdestrade.com",
 ]
 
 _render_url = config('RENDER_EXTERNAL_URL', default='')
@@ -356,6 +358,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3001",
     "http://111.90.143.29",
     "https://www.verdestrades.com",
+    "https://verdestrade.com",
+    "https://www.verdestrade.com",
 ]
 
 if _render_url and _render_url not in CSRF_TRUSTED_ORIGINS:
