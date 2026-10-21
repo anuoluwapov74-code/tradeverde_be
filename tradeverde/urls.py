@@ -5,9 +5,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render, redirect
 
-admin.site.site_header = "VerdifyTrades Administration"
-admin.site.site_title = "VerdifyTrades Admin Portal"
-admin.site.index_title = "Welcome to VerdifyTrades Admin Portal"
+admin.site.site_header = "TradeVerdify Administration"
+admin.site.site_title = "TradeVerdify Admin Portal"
+admin.site.index_title = "Welcome to TradeVerdify Admin Portal"
 
 
 from app.auth_views import (
