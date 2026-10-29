@@ -71,7 +71,7 @@ def _base_styles():
             box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
         .header {
-            background-color: #001a0f;
+            background-color: #0f1e3d;
             padding: 32px 40px;
         }
         .header-logo {
@@ -81,12 +81,12 @@ def _base_styles():
             letter-spacing: 0.5px;
         }
         .header-logo span {
-            color: #00C9A7;
+            color: #60a5fa;
         }
         .header-divider {
             width: 40px;
             height: 2px;
-            background-color: #00C9A7;
+            background-color: #60a5fa;
             margin-top: 16px;
         }
         .body-content {
@@ -138,8 +138,8 @@ def _base_styles():
         .btn {
             display: inline-block;
             padding: 12px 32px;
-            background-color: #00C9A7;
-            color: #001a0f;
+            background-color: #2563eb;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 4px;
             font-size: 14px;
@@ -147,8 +147,8 @@ def _base_styles():
             letter-spacing: 0.3px;
         }
         .info-box {
-            background-color: #f0fdf9;
-            border-left: 3px solid #00C9A7;
+            background-color: #eff6ff;
+            border-left: 3px solid #2563eb;
             padding: 16px 20px;
             margin: 24px 0;
         }
@@ -168,7 +168,7 @@ def _base_styles():
         .code-value {
             font-size: 40px;
             font-weight: 700;
-            color: #00C9A7;
+            color: #2563eb;
             letter-spacing: 12px;
             font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
         }
@@ -216,7 +216,7 @@ def _base_styles():
 def _header_html():
     return """
     <div class="header">
-        <div class="header-logo">VERDE<span>TRADES</span></div>
+        <div class="header-logo">Trade<span>Verdify</span></div>
         <div class="header-divider"></div>
     </div>
     """
@@ -432,8 +432,8 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
         <style>
             {_base_styles()}
             .amount-display {{
-                background-color: #f0fdf9;
-                border: 1px solid #99f6e4;
+                background-color: #eff6ff;
+                border: 1px solid #bfdbfe;
                 border-radius: 6px;
                 padding: 24px;
                 text-align: center;
@@ -442,7 +442,7 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
             .amount-display .amount {{
                 font-size: 32px;
                 font-weight: 700;
-                color: #00A88C;
+                color: #2563eb;
             }}
             .amount-display .label {{
                 font-size: 12px;
@@ -454,8 +454,8 @@ def send_admin_payment_intent_notification(user, currency, dollar_amount, curren
             .status-badge {{
                 display: inline-block;
                 padding: 4px 12px;
-                background-color: #f0fdf9;
-                color: #00796B;
+                background-color: #eff6ff;
+                color: #1d4ed8;
                 border-radius: 2px;
                 font-size: 11px;
                 font-weight: 600;
