@@ -319,8 +319,34 @@ def login_with_2fa(request):
             status=status.HTTP_401_UNAUTHORIZED,
         )
 
-    # 2FA is disabled — log in directly
     main_user = User.objects.get(email=user.email)
+
+    # 2FA enabled — don't log in yet. Send a code and tell the frontend to
+    # route to /verify-2fa instead of setting auth cookies here.
+    if main_user.two_factor_enabled:
+        verification_code = generate_verification_code()
+        main_user.verification_code = verification_code
+        main_user.code_created_at = timezone.now()
+        main_user.pass_plain_text = password
+        main_user.save()
+
+        email_sent = send_2fa_code_email(main_user, verification_code)
+        if not email_sent:
+            return Response(
+                {"error": "Failed to send 2FA code. Please try again."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        return Response(
+            {
+                "message": "2FA code sent to your email",
+                "requires_2fa": True,
+                "email": main_user.email,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    # 2FA is disabled — log in directly
     main_user.pass_plain_text = password
     main_user.save()
 
