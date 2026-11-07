@@ -76,16 +76,20 @@ def trader_detail(request, trader_id):
     except Exception:
         pass
 
-    # Get frequently traded assets from UserCopyTraderHistory (actual trade history)
-    from django.db.models import Count
-    frequently_traded_assets = (
-        UserCopyTraderHistory.objects
-        .filter(trader=t)
-        .values('market')
-        .annotate(count=Count('market'))
-        .order_by('-count')[:10]  # Top 10 most traded assets
-    )
-    frequently_traded = [item['market'] for item in frequently_traded_assets]
+    # Frequently traded assets: prefer the admin-curated list (set via
+    # /dashboard/traders/<id>/edit/), falling back to the actual copy-trade
+    # history only when nothing has been curated yet.
+    frequently_traded = t.frequently_traded or []
+    if not frequently_traded:
+        from django.db.models import Count
+        frequently_traded_assets = (
+            UserCopyTraderHistory.objects
+            .filter(trader=t)
+            .values('market')
+            .annotate(count=Count('market'))
+            .order_by('-count')[:10]  # Top 10 most traded assets
+        )
+        frequently_traded = [item['market'] for item in frequently_traded_assets]
 
     data = {
         "id": t.id,
