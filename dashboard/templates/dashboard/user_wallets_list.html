@@ -1,0 +1,95 @@
+{% extends "dashboard/base.html" %}
+{% load humanize %}
+{% block title %}Special Wallets - TradeVerdify Admin{% endblock %}
+{% block page_title %}Special Wallet Addresses{% endblock %}
+
+{% block content %}
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+    <div>
+        <a href="{% url 'dashboard:user_detail' view_user.id %}" class="text-xs text-indigo-600 hover:text-indigo-500"><i class="fas fa-arrow-left mr-1"></i>Back to {{ view_user.email }}</a>
+        <p class="text-sm text-gray-500 mt-1">
+            Wallets set here are shown <strong>only to {{ view_user.email }}</strong> in the deposit modal and replace the general admin wallet for the same currency.
+        </p>
+    </div>
+    <a href="{% url 'dashboard:add_user_wallet' view_user.id %}" class="shrink-0 px-5 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-500 transition">+ Add Special Wallet</a>
+</div>
+
+<h4 class="text-sm font-semibold text-gray-700 mb-3">Special wallets ({{ wallets|length }})</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+    {% for w in wallets %}
+    <div class="bg-white rounded-xl border border-gray-200/60 p-5 {% if not w.is_active %}opacity-60{% endif %}">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-bold text-xs">{{ w.currency|truncatechars:4 }}</div>
+                <div>
+                    <h4 class="font-semibold text-gray-800">{{ w.get_currency_display }}</h4>
+                    <p class="text-xs text-gray-400">Fallback rate: ${{ w.amount|floatformat:2|intcomma }}/unit</p>
+                </div>
+            </div>
+            {% if w.is_active %}
+            <span class="px-2 py-0.5 rounded-full text-xs bg-emerald-50 text-emerald-700">Active</span>
+            {% else %}
+            <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-500" title="Inactive: the user sees the general wallet for this currency">Inactive</span>
+            {% endif %}
+        </div>
+        <div class="bg-gray-50 rounded-lg p-3 mb-4">
+            <p class="text-xs text-gray-500 mb-1">Wallet Address</p>
+            <p class="text-xs font-mono text-gray-700 break-all">{{ w.wallet_address }}</p>
+        </div>
+        {% if w.qr_code %}
+        <div class="flex justify-center mb-4">
+            <img src="{{ w.qr_code.url }}" class="w-20 h-20 rounded border" alt="QR">
+        </div>
+        {% endif %}
+        <div class="flex gap-2">
+            <a href="{% url 'dashboard:edit_user_wallet' view_user.id w.id %}" class="flex-1 text-center px-3 py-2 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-medium hover:bg-indigo-100 transition">Edit</a>
+            <a href="{% url 'dashboard:delete_user_wallet' view_user.id w.id %}" class="flex-1 text-center px-3 py-2 bg-red-50 text-red-600 rounded-lg text-xs font-medium hover:bg-red-100 transition">Delete</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full bg-white rounded-xl border border-gray-200/60 p-10 text-center">
+        <i class="fas fa-wallet text-4xl text-gray-300 mb-4"></i>
+        <p class="text-gray-400 mb-4">No special wallets yet. This user sees the general admin wallets.</p>
+        <a href="{% url 'dashboard:add_user_wallet' view_user.id %}" class="px-5 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-500 transition">Add Special Wallet</a>
+    </div>
+    {% endfor %}
+</div>
+
+<h4 class="text-sm font-semibold text-gray-700 mb-3">What this user sees per currency</h4>
+<div class="bg-white rounded-xl border border-gray-200/60 overflow-hidden">
+    <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
+            <tr>
+                <th class="text-left px-4 py-3 font-medium">Currency</th>
+                <th class="text-left px-4 py-3 font-medium">General wallet address</th>
+                <th class="text-left px-4 py-3 font-medium">Shown to user</th>
+                <th class="px-4 py-3"></th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for g in general_wallets %}
+            <tr>
+                <td class="px-4 py-3 font-medium text-gray-800">{{ g.get_currency_display }}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-500 break-all">{{ g.wallet_address }}</td>
+                <td class="px-4 py-3">
+                    {% if g.currency in overridden %}
+                    <span class="px-2 py-0.5 rounded-full text-xs bg-sky-50 text-sky-700">Special wallet</span>
+                    {% else %}
+                    <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-500">General wallet</span>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-3 text-right whitespace-nowrap">
+                    {% if g.currency not in overridden %}
+                    <a href="{% url 'dashboard:add_user_wallet' view_user.id %}?currency={{ g.currency|urlencode }}" class="text-xs font-medium text-indigo-600 hover:text-indigo-500">Set special</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">No active general admin wallets.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

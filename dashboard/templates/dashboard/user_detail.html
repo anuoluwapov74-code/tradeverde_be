@@ -74,6 +74,12 @@
                 </form>
                 {% endif %}
 
+                <!-- Special (user-specific) deposit wallets -->
+                <a href="{% url 'dashboard:user_wallets_list' view_user.id %}"
+                   class="w-full text-center px-3 py-2.5 bg-sky-50 text-sky-700 rounded-lg text-xs font-medium hover:bg-sky-100 transition">
+                    <i class="fas fa-wallet mr-1"></i>Special Wallet Addresses{% with n=view_user.special_wallets.count %}{% if n %} ({{ n }}){% endif %}{% endwith %}
+                </a>
+
                 <!-- Transfer Toggle -->
                 <form method="post">{% csrf_token %}
                     <input type="hidden" name="action" value="toggle_transfer">

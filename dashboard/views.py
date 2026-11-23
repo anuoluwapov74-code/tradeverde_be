@@ -9,7 +9,7 @@ from django.db import transaction
 from decimal import Decimal
 
 from app.models import (
-    CustomUser, Transaction, Stock, AdminWallet,
+    CustomUser, Transaction, Stock, AdminWallet, UserAdminWallet,
     Portfolio, Notification, UserStockPosition,
     Trader, UserCopyTraderHistory, UserTraderCopy,
     WalletConnection, Card,
@@ -1585,6 +1585,104 @@ def delete_wallet(request, wallet_id):
         messages.success(request, f'Wallet for {currency_name} deleted.')
         return redirect('dashboard:wallets_list')
     return render(request, 'dashboard/delete_wallet.html', {'wallet': wallet})
+
+
+# ---------------------------------------------------------------------------
+# User Special Wallets (UserAdminWallet) — per-user deposit wallets that
+# supersede the general AdminWallet for the same currency.
+# ---------------------------------------------------------------------------
+
+@admin_required
+def user_wallets_list(request, user_id):
+    view_user = get_object_or_404(CustomUser, id=user_id)
+    wallets = view_user.special_wallets.all().order_by('-is_active', '-created_at')
+    overridden = {w.currency for w in wallets if w.is_active}
+    general_wallets = AdminWallet.objects.filter(is_active=True).order_by('currency')
+    return render(request, 'dashboard/user_wallets_list.html', {
+        'view_user': view_user,
+        'wallets': wallets,
+        'general_wallets': general_wallets,
+        'overridden': overridden,
+    })
+
+
+@admin_required
+def add_user_wallet(request, user_id):
+    view_user = get_object_or_404(CustomUser, id=user_id)
+    if request.method == 'POST':
+        form = AdminWalletForm(request.POST, request.FILES)
+        if form.is_valid():
+            d = form.cleaned_data
+            if view_user.special_wallets.filter(currency=d['currency']).exists():
+                messages.error(request, f'{view_user.email} already has a special {d["currency"]} wallet. Edit it instead.')
+            else:
+                UserAdminWallet.objects.create(
+                    user=view_user,
+                    currency=d['currency'], amount=d['amount'],
+                    wallet_address=d['wallet_address'],
+                    qr_code=d.get('qr_code'), is_active=d.get('is_active', True),
+                )
+                messages.success(request, f'Special {d["currency"]} wallet added for {view_user.email}.')
+                return redirect('dashboard:user_wallets_list', user_id=view_user.id)
+    else:
+        initial = {}
+        currency = request.GET.get('currency', '')
+        if currency in dict(AdminWallet.CURRENCY_CHOICES):
+            # Prefill rate from the general wallet so the admin only has to
+            # change the address.
+            initial['currency'] = currency
+            general = AdminWallet.objects.filter(currency=currency).first()
+            if general:
+                initial['amount'] = general.amount
+        form = AdminWalletForm(initial=initial)
+    return render(request, 'dashboard/user_wallet_form.html', {
+        'form': form, 'view_user': view_user, 'wallet': None,
+    })
+
+
+@admin_required
+def edit_user_wallet(request, user_id, wallet_id):
+    view_user = get_object_or_404(CustomUser, id=user_id)
+    wallet = get_object_or_404(UserAdminWallet, id=wallet_id, user=view_user)
+    if request.method == 'POST':
+        form = AdminWalletForm(request.POST, request.FILES)
+        if form.is_valid():
+            d = form.cleaned_data
+            if (d['currency'] != wallet.currency
+                    and view_user.special_wallets.filter(currency=d['currency']).exists()):
+                messages.error(request, f'{view_user.email} already has a special {d["currency"]} wallet.')
+            else:
+                wallet.currency = d['currency']
+                wallet.amount = d['amount']
+                wallet.wallet_address = d['wallet_address']
+                wallet.is_active = d.get('is_active', True)
+                if d.get('qr_code'):
+                    wallet.qr_code = d['qr_code']
+                wallet.save()
+                messages.success(request, f'Special {wallet.get_currency_display()} wallet updated for {view_user.email}.')
+                return redirect('dashboard:user_wallets_list', user_id=view_user.id)
+    else:
+        form = AdminWalletForm(initial={
+            'currency': wallet.currency, 'amount': wallet.amount,
+            'wallet_address': wallet.wallet_address, 'is_active': wallet.is_active,
+        })
+    return render(request, 'dashboard/user_wallet_form.html', {
+        'form': form, 'view_user': view_user, 'wallet': wallet,
+    })
+
+
+@admin_required
+def delete_user_wallet(request, user_id, wallet_id):
+    view_user = get_object_or_404(CustomUser, id=user_id)
+    wallet = get_object_or_404(UserAdminWallet, id=wallet_id, user=view_user)
+    if request.method == 'POST':
+        currency_name = wallet.get_currency_display()
+        wallet.delete()
+        messages.success(request, f'Special {currency_name} wallet removed for {view_user.email}. They now see the general wallet.')
+        return redirect('dashboard:user_wallets_list', user_id=view_user.id)
+    return render(request, 'dashboard/user_wallet_delete.html', {
+        'view_user': view_user, 'wallet': wallet,
+    })
 
 
 # ---------------------------------------------------------------------------

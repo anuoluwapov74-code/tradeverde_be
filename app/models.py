@@ -1275,6 +1275,45 @@ class AdminWallet(models.Model):
         return f"{self.get_currency_display()} - {self.wallet_address[:10]}..."
 
 
+class UserAdminWallet(models.Model):
+    """
+    A deposit wallet the admin assigns to one specific user.
+
+    Mirrors AdminWallet's fields. When an active UserAdminWallet exists for a
+    user + currency, the deposit options endpoint shows it to that user in
+    place of the general AdminWallet for the same currency. Currencies with
+    no user-specific wallet still fall back to the general AdminWallet.
+    """
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="special_wallets",
+    )
+    currency = models.CharField(max_length=100, choices=AdminWallet.CURRENCY_CHOICES)
+    amount = models.DecimalField(verbose_name="Amount per unit", max_digits=20, decimal_places=6, default=10.00)
+    wallet_address = models.CharField(max_length=255)
+    qr_code = CloudinaryField(
+        "QRCode",
+        folder="user_wallet_qrcodes",
+        blank=True,
+        null=True,
+        help_text="Optional QR code image for scanning"
+    )
+
+    is_active = models.BooleanField(default=True, help_text="Enable/disable this payment option for the user")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "User Admin Wallet"
+        verbose_name_plural = "User Admin Wallets"
+        ordering = ["-created_at"]
+        unique_together = ["user", "currency"]
+
+    def __str__(self):
+        return f"{self.user.email} · {self.get_currency_display()} - {self.wallet_address[:10]}..."
+
+
 class Asset(models.Model):
     CATEGORY_CHOICES = [
         ("Forex", "Forex"),

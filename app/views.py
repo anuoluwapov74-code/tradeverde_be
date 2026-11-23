@@ -14,7 +14,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import AdminWallet, Transaction, PaymentMethod, Notification, Stock
+from .models import AdminWallet, UserAdminWallet, Transaction, PaymentMethod, Notification, Stock
 from decimal import Decimal
 from .email_service import (
     send_admin_payment_intent_notification,
@@ -92,9 +92,23 @@ def get_deposit_options(request):
         for s in Stock.objects.filter(symbol__in=symbols, is_active=True)
     }
 
-    wallets = AdminWallet.objects.filter(is_active=True)
+    # A logged-in user's own active special wallets supersede the general
+    # AdminWallet for the same currency. They are listed first so the deposit
+    # modal pre-selects one; currencies without a special wallet still fall
+    # back to the general AdminWallet. Anonymous requests see only general.
+    special_wallets = []
+    if request.user and request.user.is_authenticated:
+        special_wallets = list(
+            UserAdminWallet.objects.filter(user=request.user, is_active=True)
+        )
+    special_currencies = {w.currency for w in special_wallets}
+    general_wallets = [
+        w for w in AdminWallet.objects.filter(is_active=True)
+        if w.currency not in special_currencies
+    ]
+
     wallet_list = []
-    for w in wallets:
+    for w in special_wallets + general_wallets:
         qr_code_url = None
         if w.qr_code:
             try:

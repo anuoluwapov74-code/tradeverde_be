@@ -6,6 +6,7 @@ from .models import (
     Transaction, 
     PaymentMethod, 
     AdminWallet, 
+    UserAdminWallet,
     Trader, 
     # Asset,
     TraderPortfolio,
@@ -264,6 +265,14 @@ class PortfolioAdmin(admin.ModelAdmin):
 admin.site.register(Transaction)
 admin.site.register(PaymentMethod)
 admin.site.register(AdminWallet)
+
+
+@admin.register(UserAdminWallet)
+class UserAdminWalletAdmin(admin.ModelAdmin):
+    list_display = ("user", "currency", "wallet_address", "is_active", "updated_at")
+    list_filter = ("currency", "is_active")
+    search_fields = ("user__email", "wallet_address")
+    raw_id_fields = ("user",)
 
 # admin.site.register(Asset)
 admin.site.register(News)
