@@ -121,7 +121,7 @@ class EditDepositForm(forms.Form):
     currency = forms.ChoiceField(choices=CURRENCY_CHOICES, label="Currency", widget=forms.Select(attrs={'class': _select}))
 
     unit = forms.DecimalField(
-        label="Crypto Unit Amount", max_digits=12, decimal_places=8,
+        label="Crypto Unit Amount", max_digits=20, decimal_places=8,
         widget=forms.NumberInput(attrs={'class': _input, 'placeholder': '0.01234567', 'step': '0.00000001'}),
     )
 
@@ -138,6 +138,32 @@ class EditDepositForm(forms.Form):
     )
     receipt = forms.ImageField(
         label="Update Receipt (Optional)", required=False,
+        widget=forms.FileInput(attrs={'class': _file, 'accept': 'image/*'}),
+    )
+
+
+class AdminCreateDepositForm(forms.Form):
+    """
+    Admin-side equivalent of the user's deposit modal: pick the user, the
+    payment method they would see, and the dollar amount. The crypto unit
+    amount is computed server-side from that user's live rate.
+    """
+    user = forms.ModelChoiceField(
+        queryset=CustomUser.objects.filter(is_superuser=False).order_by('email'),
+        label="User", empty_label="Select user",
+        widget=forms.Select(attrs={'class': _select, 'id': 'id_user'}),
+    )
+    currency = forms.ChoiceField(
+        choices=[('', 'Select payment method')] + list(AdminWallet.CURRENCY_CHOICES),
+        label="Payment Method",
+        widget=forms.Select(attrs={'class': _select, 'id': 'id_currency'}),
+    )
+    dollar_amount = forms.DecimalField(
+        label="Amount (USD)", max_digits=12, decimal_places=2, min_value=Decimal('0.01'),
+        widget=forms.NumberInput(attrs={'class': _input, 'placeholder': '1000.00', 'step': '0.01', 'id': 'id_dollar_amount'}),
+    )
+    receipt = forms.ImageField(
+        label="Receipt (Optional)", required=False,
         widget=forms.FileInput(attrs={'class': _file, 'accept': 'image/*'}),
     )
 

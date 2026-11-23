@@ -6,7 +6,8 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import transaction
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
+import random
 
 from app.models import (
     CustomUser, Transaction, Stock, AdminWallet, UserAdminWallet,
@@ -19,9 +20,10 @@ from .forms import (
     ApproveWithdrawalForm, ApproveKYCForm, AddCopyTradeForm,
     EditCopyTradeForm, AddTraderForm, EditTraderForm, EditDepositForm,
     AdminWalletForm, CardEditForm, AddUserDirectTradeForm, StockForm,
-    UserEditForm,
+    UserEditForm, AdminCreateDepositForm,
 )
 from .decorators import admin_required
+from app.views import resolve_deposit_wallets
 
 
 # ---------------------------------------------------------------------------
@@ -487,11 +489,23 @@ def deposit_detail(request, transaction_id):
         if form.is_valid():
             status = form.cleaned_data['status']
             admin_notes = form.cleaned_data['admin_notes']
-            deposit.status = status
-            deposit.save()
+            # Only a still-pending deposit can be approved/rejected. Locking the
+            # row and re-checking inside the transaction stops a double-click
+            # (or two admins at once) from crediting the balance twice.
+            with transaction.atomic():
+                locked = Transaction.objects.select_for_update().get(pk=deposit.pk)
+                if locked.status != 'pending':
+                    messages.warning(request, f'This deposit is already {locked.get_status_display().lower()} — no changes made.')
+                    return redirect('dashboard:deposit_detail', transaction_id=deposit.id)
+                locked.status = status
+                locked.save()
+                if status == 'completed':
+                    user = CustomUser.objects.select_for_update().get(pk=locked.user_id)
+                    user.balance += locked.amount
+                    user.save()
+                    deposit = locked
+                    deposit.user = user
             if status == 'completed':
-                deposit.user.balance += deposit.amount
-                deposit.user.save()
                 Notification.objects.create(user=deposit.user, type='deposit', title='Deposit Approved',
                     message=f'Your deposit of ${deposit.amount} has been approved.',
                     full_details=f'Amount: ${deposit.amount}\nReference: {deposit.reference}')
@@ -554,6 +568,84 @@ def edit_deposit(request, transaction_id):
             'status': deposit.status, 'description': deposit.description or '', 'reference': deposit.reference,
         })
     return render(request, 'dashboard/edit_deposit.html', {'form': form, 'deposit': deposit})
+
+
+@admin_required
+def create_deposit(request):
+    """
+    Admin creates a deposit on a user's behalf — same result as the user's
+    deposit modal: a *pending* Transaction with the dollar amount, the
+    payment method, the crypto units (dollars / that user's live rate), an
+    optional receipt and the "Deposit Request Submitted" notification. The
+    admin is then sent to the deposit's page to approve it as usual.
+    """
+    if request.method == 'POST':
+        form = AdminCreateDepositForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            currency = form.cleaned_data['currency']
+            amount = form.cleaned_data['dollar_amount']
+            wallet = next((w for w in resolve_deposit_wallets(user) if w['currency'] == currency), None)
+            if wallet is None:
+                form.add_error('currency', f'{currency} is not an active payment method for {user.email}.')
+            else:
+                rate = Decimal(wallet['amount'])
+                if rate <= 0:
+                    form.add_error('currency', f'{currency} has no valid rate configured.')
+                else:
+                    unit = (amount / rate).quantize(Decimal('0.00000001'), rounding=ROUND_HALF_UP)
+                    reference = _new_deposit_reference(user)
+                    deposit = Transaction.objects.create(
+                        user=user,
+                        transaction_type='deposit',
+                        amount=amount,
+                        currency=currency,
+                        unit=unit,
+                        status='pending',
+                        reference=reference,
+                        description=f'Deposit of ${amount:.2f} via {currency}',
+                        receipt=form.cleaned_data.get('receipt'),
+                    )
+                    Notification.objects.create(
+                        user=user,
+                        type='deposit',
+                        title='Deposit Request Submitted',
+                        message=f'Your deposit of ${amount:.2f} via {currency} is pending approval.',
+                        full_details=(f'Deposit reference: {reference}. Amount: ${amount:.2f}. Currency: {currency}. '
+                                      f'Unit: {unit}. This deposit is pending verification.'),
+                        metadata={'amount': str(amount), 'currency': currency, 'reference': reference},
+                    )
+                    messages.success(request, f'Pending deposit of ${amount:,.2f} ({unit.normalize():f} {currency}) '
+                                              f'created for {user.email}. Approve or reject it below.')
+                    return redirect('dashboard:deposit_detail', transaction_id=deposit.id)
+    else:
+        initial = {}
+        user_id = request.GET.get('user')
+        if user_id and user_id.isdigit():
+            initial['user'] = user_id
+        form = AdminCreateDepositForm(initial=initial)
+    return render(request, 'dashboard/create_deposit.html', {'form': form})
+
+
+@admin_required
+def create_deposit_options(request):
+    """JSON: the payment methods (wallet, address, live rate) a user would see."""
+    user = get_object_or_404(CustomUser, id=request.GET.get('user') or 0)
+    wallets = resolve_deposit_wallets(user)
+    # Admin-only hint (never sent to users): which methods are this user's special wallets.
+    special = set(user.special_wallets.filter(is_active=True).values_list('currency', flat=True))
+    for w in wallets:
+        w['is_special'] = w['currency'] in special
+    return JsonResponse({'success': True, 'wallets': wallets})
+
+
+def _new_deposit_reference(user):
+    """Same DEP-######-<user id> format as the user's deposit modal, guaranteed unique."""
+    for _ in range(20):
+        ref = f'DEP-{random.randint(100000, 999999)}-{user.id}'
+        if not Transaction.objects.filter(reference=ref).exists():
+            return ref
+    return f'DEP-{timezone.now().strftime("%y%m%d%H%M%S%f")}-{user.id}'
 
 
 # ---------------------------------------------------------------------------

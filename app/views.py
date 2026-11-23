@@ -63,14 +63,14 @@ def sync_trigger(request, sync_type):
 # DEPOSIT VIEWS
 # ============================================================
 
-@api_view(["GET"])
-@permission_classes([AllowAny])
-def get_deposit_options(request):
+def resolve_deposit_wallets(user=None):
     """
-    Get all active admin wallets (deposit payment methods).
-    Rates are sourced live from the Stock table (populated by sync_crypto_rates).
-    Falls back to the manually-set AdminWallet.amount if not found.
-    Public endpoint - no auth required.
+    The deposit payment methods a given user sees, as a list of dicts.
+
+    Shared by the user-facing deposit modal (get_deposit_options) and the
+    admin "Create Deposit" page, so both always offer the same wallets,
+    addresses and rates. Pass user=None (or an anonymous user) for the
+    general wallets only.
     """
     # Map AdminWallet currency labels to FMP Stock symbols
     CURRENCY_TO_SYMBOL = {
@@ -97,9 +97,9 @@ def get_deposit_options(request):
     # modal pre-selects one; currencies without a special wallet still fall
     # back to the general AdminWallet. Anonymous requests see only general.
     special_wallets = []
-    if request.user and request.user.is_authenticated:
+    if user is not None and user.is_authenticated:
         special_wallets = list(
-            UserAdminWallet.objects.filter(user=request.user, is_active=True)
+            UserAdminWallet.objects.filter(user=user, is_active=True)
         )
     special_currencies = {w.currency for w in special_wallets}
     general_wallets = [
@@ -137,9 +137,20 @@ def get_deposit_options(request):
             "is_active": w.is_active,
         })
 
+    return wallet_list
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_deposit_options(request):
+    """
+    Get all active admin wallets (deposit payment methods) for the requester.
+    A logged-in user's special wallets supersede the general ones.
+    Public endpoint - no auth required.
+    """
     return Response({
         "success": True,
-        "wallets": wallet_list,
+        "wallets": resolve_deposit_wallets(request.user),
     })
 
 

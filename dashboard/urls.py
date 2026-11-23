@@ -27,6 +27,8 @@ urlpatterns = [
 
     # Deposits
     path('deposits/', views.deposits, name='deposits'),
+    path('deposits/create/', views.create_deposit, name='create_deposit'),
+    path('deposits/create/options/', views.create_deposit_options, name='create_deposit_options'),
     path('deposits/<int:transaction_id>/', views.deposit_detail, name='deposit_detail'),
     path('deposits/<int:transaction_id>/edit/', views.edit_deposit, name='edit_deposit'),
 

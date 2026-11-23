@@ -1155,7 +1155,10 @@ class Transaction(models.Model):
     reference = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
     currency = models.CharField(max_length=100)
-    unit = models.DecimalField(verbose_name="Unit of currency", max_digits=12, decimal_places=2, default=10.00)
+    # 8 decimal places: crypto unit amounts (e.g. 0.00123456 BTC) were being
+    # rounded to 2 dp and saved as 0.00. The deposit modal and admin forms
+    # already work to 8 dp; max_digits widened so 12 integer digits still fit.
+    unit = models.DecimalField(verbose_name="Unit of currency", max_digits=20, decimal_places=8, default=10.00)
 
     WITHDRAWAL_SOURCES = [
         ('balance', 'Main Balance'),

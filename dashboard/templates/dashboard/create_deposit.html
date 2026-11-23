@@ -1,0 +1,143 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Create Deposit - TradeVerdify Admin{% endblock %}
+{% block page_title %}Create Deposit{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl">
+    <p class="text-sm text-gray-500 mb-4">
+        Create a deposit on a user's behalf, exactly as if they had completed the deposit modal.
+        It is saved as <strong>pending</strong>; you'll be taken to it next to approve or reject it.
+    </p>
+    <div class="bg-white rounded-xl border border-gray-200/60 p-6">
+        <form method="post" enctype="multipart/form-data" id="create-deposit-form">{% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-4 text-sm text-red-600">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <!-- 1. User -->
+            <div class="mb-5">
+                <label class="block text-sm font-medium text-gray-600 mb-1">{{ form.user.label }}</label>
+                <input type="text" id="user-search" placeholder="Filter users by email…" autocomplete="off"
+                       class="w-full px-4 py-2 mb-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500">
+                {{ form.user }}
+                {% for error in form.user.errors %}<p class="text-xs text-red-500 mt-1">{{ error }}</p>{% endfor %}
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- 2. Payment method -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">{{ form.currency.label }}</label>
+                    {{ form.currency }}
+                    <p id="currency-hint" class="text-xs text-gray-400 mt-1">Select a user to load the payment methods they see.</p>
+                    {% for error in form.currency.errors %}<p class="text-xs text-red-500 mt-1">{{ error }}</p>{% endfor %}
+                </div>
+
+                <!-- 3. Amount -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">{{ form.dollar_amount.label }}</label>
+                    {{ form.dollar_amount }}
+                    {% for error in form.dollar_amount.errors %}<p class="text-xs text-red-500 mt-1">{{ error }}</p>{% endfor %}
+                </div>
+            </div>
+
+            <!-- Live conversion preview (server recomputes on submit) -->
+            <div id="conversion" class="hidden mt-5 bg-indigo-50/60 border border-indigo-100 rounded-lg p-4 text-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div><p class="text-xs text-gray-500 mb-0.5">Rate</p><p class="font-medium text-gray-800">$<span id="conv-rate">—</span> / unit</p></div>
+                    <div><p class="text-xs text-gray-500 mb-0.5">User will be credited (on approval)</p><p class="font-medium text-gray-800">$<span id="conv-usd">0.00</span></p></div>
+                    <div><p class="text-xs text-gray-500 mb-0.5">Crypto units</p><p class="font-semibold text-indigo-700"><span id="conv-units">0</span> <span id="conv-cur"></span></p></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 mb-0.5">Wallet address shown to this user <span id="conv-special" class="hidden ml-1 px-1.5 py-0.5 rounded bg-sky-100 text-sky-700">special wallet</span></p>
+                <p id="conv-address" class="font-mono text-xs text-gray-700 break-all"></p>
+            </div>
+
+            <!-- 4. Receipt -->
+            <div class="mt-5">
+                <label class="block text-sm font-medium text-gray-600 mb-1">{{ form.receipt.label }}</label>
+                {{ form.receipt }}
+                {% for error in form.receipt.errors %}<p class="text-xs text-red-500 mt-1">{{ error }}</p>{% endfor %}
+            </div>
+
+            <div class="mt-6 flex gap-3">
+                <button type="submit" class="px-8 py-3 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-500 transition">Create Pending Deposit</button>
+                <a href="{% url 'dashboard:deposits' %}" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    const optionsUrl = "{% url 'dashboard:create_deposit_options' %}";
+    const userSel = document.getElementById('id_user');
+    const curSel = document.getElementById('id_currency');
+    const amountIn = document.getElementById('id_dollar_amount');
+    const search = document.getElementById('user-search');
+    const hint = document.getElementById('currency-hint');
+    const box = document.getElementById('conversion');
+    const $ = (id) => document.getElementById(id);
+    // Currency to keep selected after a failed POST re-renders the page.
+    let wanted = curSel.value;
+    let wallets = {};
+
+    // Filter the user dropdown by email as the admin types.
+    const allUsers = Array.from(userSel.options).map(o => ({ value: o.value, text: o.text }));
+    search.addEventListener('input', () => {
+        const q = search.value.trim().toLowerCase();
+        const current = userSel.value;
+        userSel.innerHTML = '';
+        allUsers.filter(u => !u.value || u.text.toLowerCase().includes(q) || u.value === current)
+            .forEach(u => userSel.add(new Option(u.text, u.value, false, u.value === current)));
+    });
+
+    function resetCurrencies(message) {
+        curSel.innerHTML = '';
+        curSel.add(new Option('Select payment method', ''));
+        hint.textContent = message;
+        wallets = {};
+        updatePreview();
+    }
+
+    async function loadOptions() {
+        if (!userSel.value) { resetCurrencies('Select a user to load the payment methods they see.'); return; }
+        resetCurrencies('Loading payment methods…');
+        try {
+            const res = await fetch(optionsUrl + '?user=' + encodeURIComponent(userSel.value), { credentials: 'same-origin' });
+            const data = await res.json();
+            if (!data.success || !data.wallets.length) { resetCurrencies('This user has no active payment methods.'); return; }
+            data.wallets.forEach(w => {
+                wallets[w.currency] = w;
+                curSel.add(new Option(w.currency_display, w.currency, false, w.currency === wanted));
+            });
+            if (!curSel.value) curSel.selectedIndex = 1;  // default to first, like the user's modal
+            hint.textContent = 'Same methods, addresses and live rates this user sees in their deposit modal.';
+        } catch (e) {
+            resetCurrencies('Could not load payment methods — please retry.');
+        }
+        updatePreview();
+    }
+
+    function updatePreview() {
+        const w = wallets[curSel.value];
+        if (!w) { box.classList.add('hidden'); return; }
+        box.classList.remove('hidden');
+        const rate = parseFloat(w.amount);
+        const dollars = parseFloat(amountIn.value);
+        $('conv-rate').textContent = rate.toLocaleString(undefined, { maximumFractionDigits: 6 });
+        $('conv-usd').textContent = isNaN(dollars) ? '0.00' : dollars.toFixed(2);
+        $('conv-units').textContent = (!isNaN(dollars) && rate > 0) ? (dollars / rate).toFixed(8) : '0';
+        $('conv-cur').textContent = w.currency;
+        $('conv-address').textContent = w.wallet_address;
+        // Special wallets are listed first by the server; flag if this one is user-specific.
+        $('conv-special').classList.toggle('hidden', !w.is_special);
+    }
+
+    userSel.addEventListener('change', () => { wanted = ''; loadOptions(); });
+    curSel.addEventListener('change', () => { wanted = curSel.value; updatePreview(); });
+    amountIn.addEventListener('input', updatePreview);
+    loadOptions();
+})();
+</script>
+{% endblock %}
